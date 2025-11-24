@@ -227,7 +227,7 @@ public class CRUD {
                     System.out.println();
                     eliminarPorId(id);
                 } else if (respuesta == 6) {
-                    System.out.println("Adios");
+                    System.out.print("\tAdios");
                 } else {
                     System.out.println("Opcion introducida no valida");
                 }
