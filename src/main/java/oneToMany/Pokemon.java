@@ -24,9 +24,12 @@ public class Pokemon {
     @Column(name = "tipo2")
     private String tipo2;
 
-    // Creamos el OneToMany y le añadimos las propiedades cascade, para que las operaciones que hagas sobre el padre también se aplican automáticamente a los hijos
-    // Ademas de orphanRemoval, que si un hijo deja de estar asociado al padre, se elimina de la base de datos automáticamente
-    @OneToMany(mappedBy = "pokemon", cascade = CascadeType.ALL, orphanRemoval = true)
+    // Creamos el OneToMany y le añadimos las propiedades:
+    //    mappedBy que busca en la otra clase el campo cuyo nombre coincida con el que has puesto y evita que se cree una tabla intermedia,
+    //    cascade, para que las operaciones que hagas sobre el padre también se aplican automáticamente a los hijos
+    //    orphanRemoval, que si un hijo deja de estar asociado al padre, se elimina de la base de datos automáticamente
+    //    fetch que hace que si esta en EAGER al recuperar un pokemon recupere tambien sus Evoluciones asociadas, mientras que si es LAZY no
+    @OneToMany(mappedBy = "pokemon", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<Evolucion> evoluciones = new HashSet<>();
 
     public Pokemon() {}
@@ -41,6 +44,27 @@ public class Pokemon {
     public void addEvolucion(String nombre, int nivel, String tipo1, String tipo2) {
         Evolucion ev = new Evolucion(nombre, nivel, tipo1, tipo2, this);
         evoluciones.add(ev);
+    }
+
+    public Evolucion addEvolucion(Evolucion ev) {
+        evoluciones.add(ev);
+        return ev;
+    }
+
+    public boolean delEvolucion(Evolucion ev) {
+        evoluciones.remove(ev);
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Pokemon:" +
+                "\n\tId: " + id +
+                "\n\tNombre: " + nombre +
+                "\n\tNivel: " + nivel +
+                "\n\tTipo1: " + tipo1 +
+                "\n\tTipo2: " + tipo2 +
+                "\n\tEvoluciones: \n\t\t" + evoluciones.toString().replace("[", "").replace("]", "").replace(",","\n\t\t");
     }
 
     public boolean removeEvolucion(Evolucion ev) {

@@ -22,8 +22,10 @@ public class Pokemon {
     @Column(name = "tipo2")
     private String tipo2;
 
-    // Creamos el OneToMany y le añadimos las propiedades cascade, para que las operaciones que hagas sobre el padre también se aplican automáticamente a los hijos
-    // Ademas de orphanRemoval, que si un hijo deja de estar asociado al padre, se elimina de la base de datos automáticamente
+    // Creamos el OneToMany y le añadimos las propiedades:
+    //    mappedBy que busca en la otra clase el campo cuyo nombre coincida con el que has puesto,
+    //    cascade, para que las operaciones que hagas sobre el padre también se aplican automáticamente a los hijos
+    //    orphanRemoval, que si un hijo deja de estar asociado al padre, se elimina de la base de datos automáticamente
     @OneToMany(mappedBy = "pokemon", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Evolucion> evoluciones = new HashSet<>();
 

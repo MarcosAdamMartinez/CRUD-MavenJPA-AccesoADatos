@@ -15,8 +15,8 @@ public class Evolucion {
     private String tipo1;
     private String tipo2;
 
-    // Especificamos con JoinColumn el nombre de la columna que se debe crear como referencia a la tabla padre
     @ManyToOne
+    // Especificamos con JoinColumn el nombre de la columna que se debe crear como referencia a la tabla padre
     @JoinColumn(name = "id_pokemon")
     private Pokemon pokemon;
 
@@ -28,6 +28,16 @@ public class Evolucion {
         this.tipo1 = tipo1;
         this.tipo2 = tipo2;
         this.pokemon = pokemon;
+    }
+
+    @Override
+    public String toString() {
+        return "Evolucion: " +
+                "\n\t\t\tId: " + id +
+                "\n\t\t\tNombre: " + nombre +
+                "\n\t\t\tNivel: " + nivel +
+                "\n\t\t\tTipo1: " + tipo1 +
+                "\n\t\t\tTipo2: " + tipo2;
     }
 
     public int getId() { return id; }

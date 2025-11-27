@@ -13,10 +13,10 @@ public class Evolucion {
     private String tipo1;
     private String tipo2;
 
+    @ManyToOne
     // Especificamos con JoinColumn el nombre de la columna que se debe crear como referencia a la tabla padre
     // Ademas le pasamos como propiedad en el referencedColumnName el nombre de la columna a la que hace referencia
     // Y por ultimo instanciamos que no ha de ser null con la propiedad nullable dandole de valor false
-    @ManyToOne
     @JoinColumn(name = "nombre_pok", referencedColumnName = "nombre", nullable = false)
     private Pokemon pokemon;
 
