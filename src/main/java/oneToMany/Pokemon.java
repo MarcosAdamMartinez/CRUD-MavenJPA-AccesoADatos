@@ -2,6 +2,7 @@ package oneToMany;
 
 import jakarta.persistence.*;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
@@ -30,7 +31,7 @@ public class Pokemon {
     //    orphanRemoval, que si un hijo deja de estar asociado al padre, se elimina de la base de datos automáticamente
     //    fetch que hace que si esta en EAGER al recuperar un pokemon recupere tambien sus Evoluciones asociadas, mientras que si es LAZY no
     @OneToMany(mappedBy = "pokemon", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private Set<Evolucion> evoluciones = new HashSet<>();
+    private Set<Evolucion> evoluciones = new LinkedHashSet<>();
 
     public Pokemon() {}
 
@@ -90,4 +91,8 @@ public class Pokemon {
     public void setTipo2(String tipo2) { this.tipo2 = tipo2; }
 
     public Set<Evolucion> getEvoluciones() { return evoluciones; }
+
+    public void setEvoluciones(Set<Evolucion> evoluciones) {
+        this.evoluciones = evoluciones;
+    }
 }

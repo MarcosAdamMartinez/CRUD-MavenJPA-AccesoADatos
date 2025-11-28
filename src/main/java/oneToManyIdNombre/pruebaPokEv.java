@@ -1,4 +1,4 @@
-package oneToMany2;
+package oneToManyIdNombre;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;

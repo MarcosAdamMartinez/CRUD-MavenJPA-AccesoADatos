@@ -7,12 +7,17 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+// Al comentar las anotaciones @Table, vemos que si la tabla ya esta creada, y los nombres no coinciden, se crearia una nueva
+// Al comentar las anotaciones @Column, vemos que si la tabla ya esta creada, y los nombres no coinciden, se adaptan los campos
+// La tabla si no existe se crea con el nombre de la clase en mayuscula y los nombres de los campos son los de los atributos en mayusculas también
+
 @Entity
 @Table(name = "pokedex")
 public class Pokemon {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id_pokemon")
     private int id;
 
     @Column(name = "nombre")

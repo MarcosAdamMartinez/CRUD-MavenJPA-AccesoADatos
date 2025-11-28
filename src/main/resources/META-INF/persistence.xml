@@ -53,8 +53,8 @@
     </persistence-unit>
 
     <persistence-unit name="UnidadPokemon3">
-        <class>oneToMany2.Pokemon</class>
-        <class>oneToMany2.Evolucion</class>
+        <class>oneToManyIdNombre.Pokemon</class>
+        <class>oneToManyIdNombre.Evolucion</class>
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
             <property name="jakarta.persistence.jdbc.user" value="dam2" />
