@@ -107,7 +107,7 @@ public class pruebaPokEv {
                 tipo2 = tecladoIf.next();
 
                 po.addEvolucion(nombre, nivel, tipo1, tipo2);
-                System.out.print("Evolucion añadida con exito, desea añadir otra? (si | no):");
+                System.out.print("Evolucion añadida con exito, desea añadir otra? (si | no): ");
                 String respuesta = tecladoIf.next();
                 System.out.println();
                 if (respuesta.equalsIgnoreCase("no")){
