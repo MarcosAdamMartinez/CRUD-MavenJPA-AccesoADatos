@@ -390,7 +390,7 @@ public class pruebaPokAt {
     }
 
     public static void actualizarPokemonPorId(int id) {
-        boolean cambioNombre = preguntarBoolean("Desea cambiar le nombre?");
+        boolean cambioNombre = preguntarBoolean("Desea cambiar el nombre?");
         boolean cambioNivel = preguntarBoolean("Desea cambiar el nivel?");
         boolean cambioTipo1 = preguntarBoolean("Desea cambiar el tipo principal?");
         boolean cambioTipo2 = preguntarBoolean("Desea cambiar el tipo secundario?");
@@ -446,7 +446,7 @@ public class pruebaPokAt {
                 for (Ataque at: ataques) {
                     System.out.println("\t\t"+at);
                 }
-                int numEvo = pedirEntero("Introduce cual de los ataques quieres cambiar");
+                int numEvo = pedirEntero("Introduce el numero del ataque que quieres cambiar");
                 int contador = 0;
                 boolean cambioNombreAt = preguntarBoolean("Desea cambiar el nombre?");
                 boolean cambioTipoAt = preguntarBoolean("Desea cambiar el tipo del ataque?");
@@ -576,9 +576,9 @@ public class pruebaPokAt {
 
                 System.out.println();
 
-                int numPok = pedirEntero("Introduce cual de los pokemon quieres cambiar");
+                int numPok = pedirEntero("Introduce el numero del pokemon que quieres cambiar");
                 int contador = 0;
-                boolean cambioNombrePok = preguntarBoolean("Desea cambiar le nombre?");
+                boolean cambioNombrePok = preguntarBoolean("Desea cambiar el nombre?");
                 boolean cambioNivel = preguntarBoolean("Desea cambiar el nivel?");
                 boolean cambioTipo1 = preguntarBoolean("Desea cambiar el tipo principal?");
                 boolean cambioTipo2 = preguntarBoolean("Desea cambiar el tipo secundario?");

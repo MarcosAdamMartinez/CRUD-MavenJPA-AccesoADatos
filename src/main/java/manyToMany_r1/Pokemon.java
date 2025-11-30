@@ -61,6 +61,17 @@ public class Pokemon {
     }
 
 
+    @Override
+    public String toString() {
+        return "Pokemon:" +
+                "\n\tId: " + id +
+                "\n\tNombre: " + nombre +
+                "\n\tNivel: " + nivel +
+                "\n\tTipo1: " + tipo1 +
+                "\n\tTipo2: " + tipo2 +
+                "\n\tAtaques: \n\t\t" + ataques.toString().replace("[", "").replace("]", "").replace(",","\n\t\t");
+    }
+
     public String toStringAt() {
         return "\tPokemon:" +
                 "\n\t\t\t\tId: " + id +

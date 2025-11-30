@@ -55,6 +55,15 @@ public class Ataque {
         po.getAtaques().remove(this);
     }
 
+    @Override
+    public String toString() {
+        return "Ataque:" +
+                "\n\t\t\tId: " + id +
+                "\n\t\t\tNombre: " + nombre +
+                "\n\t\t\tTipo: " + tipo +
+                "\n\t\t\tPotencia: " + potencia +
+                "\n\t\t\tPrecision: " + precisionAt;
+    }
 
     public String toStringPo() {
         return "\tAtaque:" +
