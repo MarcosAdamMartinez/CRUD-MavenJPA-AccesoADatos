@@ -65,6 +65,15 @@ public class Ataque {
                 "\n\t\t\tPrecision: " + precisionAt;
     }
 
+    public String toStringPo() {
+        return "\tAtaque:" +
+                "\n\t\t\t\tId: " + id +
+                "\n\t\t\t\tNombre: " + nombre +
+                "\n\t\t\t\tTipo: " + tipo +
+                "\n\t\t\t\tPotencia: " + potencia +
+                "\n\t\t\t\tPrecision: " + precisionAt;
+    }
+
     public int getId() {
         return id;
     }

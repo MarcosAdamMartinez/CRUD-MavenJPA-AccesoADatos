@@ -14,9 +14,8 @@ public class pruebaPokEv {
     private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("UnidadPokemon4");
     private static EntityManager em = emf.createEntityManager();
 
-    public static void main(String[] args) {
+    public static void main(String[] args)     {
 
-        Scanner teclado = new Scanner(System.in);
         int respuesta = 0;
 
         try {
@@ -33,55 +32,37 @@ public class pruebaPokEv {
                         "8  -  Actualizar ataque:\n\t" +
                         "9  -  Borrar pokemon:\n\t" +
                         "10 -  Borrar ataque:\n\t" +
-                        "11 -  Salir:"
+                        "0 -  Salir:"
                 );
 
                 System.out.println("\t- - - - - - - - - - -");
-                System.out.print("\tOPCION: ");
-                respuesta = teclado.nextInt();
+                respuesta = pedirEntero("\tOPCION");
                 System.out.println();
 
                 if (respuesta == 1) {
-                    System.out.print("Introduce un nombre para el pokemon: ");
-                    String nombre = teclado.next();
-                    System.out.print("Introduce un nivel para el pokemon: ");
-                    int nivel = teclado.nextInt();
-                    System.out.print("Introduce un tipo para el pokemon: ");
-                    String tipo1 = teclado.next();
-                    System.out.print("Introduce otro tipo para el pokemon: ");
-                    String tipo2 = teclado.next();
-                    System.out.print("Quieres un ataque para el pokemon? (si | no): ");
-                    String respuestaTec = teclado.next();
+                    String nombre = pedirString("Introduce un nombre para el pokemon");
+                    int nivel = pedirEntero("Introduce un nivel para el pokemon");
+                    String tipo1 = pedirString("Introduce un tipo para el pokemon");
+                    String tipo2 = pedirString("Introduce otro tipo para el pokemon");
+                    boolean respuestaTec = preguntarBoolean("Quieres un ataque para el pokemon?");
                     System.out.println();
                     boolean ataque = false;
-                    if (respuestaTec.equalsIgnoreCase("si")){
+                    if (respuestaTec){
                         ataque = true;
-                    } else if (respuestaTec.equalsIgnoreCase("no")){
-                    } else {
-                        System.out.println("Te has colado, es o si o no");
                     }
 
                     insertarPokemon(nombre, nivel, tipo1, tipo2, ataque);
                     System.out.println("Pokemon añadido con exito\n");
-
                 } else if (respuesta == 2) {
-                    System.out.print("Introduce un nombre para el ataque (no se permiten espacios): ");
-                    String nombreAt = teclado.next();
-                    System.out.print("Introduce un tipo para el ataque: ");
-                    String tipoAt = teclado.next();
-                    System.out.print("Introduce una potencia para el ataque: ");
-                    int potenciaAt = teclado.nextInt();
-                    System.out.print("Introduce una precision para el ataque: ");
-                    int precisionAt = teclado.nextInt();
-                    System.out.print("Quieres un pokemon para el ataque? (si | no): ");
-                    String respuestaTec = teclado.next();
+                    String nombreAt = pedirString("Introduce un nombre para el ataque (no se permiten espacios)");
+                    String tipoAt = pedirString("Introduce un tipo para el ataque");
+                    int potenciaAt = pedirEntero("Introduce una potencia para el ataque");
+                    int precisionAt = pedirEntero("Introduce una precision para el ataque");
+                    boolean respuestaTec = preguntarBoolean("Quieres un pokemon para el ataque?");
                     System.out.println();
                     boolean pokemon = false;
-                    if (respuestaTec.equalsIgnoreCase("si")){
+                    if (respuestaTec){
                         pokemon = true;
-                    } else if (respuestaTec.equalsIgnoreCase("no")){
-                    } else {
-                        System.out.println("Te has colado, es o si o no");
                     }
 
                     insertarAtaque(nombreAt, tipoAt, potenciaAt, precisionAt, pokemon);
@@ -90,47 +71,58 @@ public class pruebaPokEv {
                 } else if (respuesta == 4) {
                     mostrarTodosLosAtaques();
                 } else if (respuesta == 5) {
-                    System.out.print("Introduce el nombre del pokemon que quieres buscar: ");
-                    String nombre = teclado.next();
+                    String nombre = pedirString("Introduce el nombre del pokemon que quieres buscar");
                     System.out.println();
                     mostrarPokemonPorNombre(nombre);
                 }  else if (respuesta == 6) {
-                    System.out.print("Introduce el nombre del ataque que quieres buscar: ");
-                    String nombre = teclado.next();
-                    System.out.println();
+                    String nombre = pedirString("Introduce el nombre del ataque que quieres buscar");
                     mostrarAtaquePorNombre(nombre);
                 } else if (respuesta == 7) {
-                    System.out.print("Introduce el id del pokemon que quieres actualizar: ");
-                    int id = teclado.nextInt();
+                    int id = pedirEntero("Introduce el id del pokemon que quieres actualizar");
                     System.out.println();
                     actualizarPokemonPorId(id);
                 } else if (respuesta == 8) {
-                    System.out.print("Introduce el id del ataque que quieres actualizar: ");
-                    int id = teclado.nextInt();
+                    int id = pedirEntero("Introduce el id del ataque que quieres actualizar");
                     System.out.println();
                     actualizarAtaquePorId(id);
                 } else if (respuesta == 9) {
-                    System.out.print("Introduce el id del pokemon que quieres eliminar: ");
-                    int id = teclado.nextInt();
+                    int id = pedirEntero("Introduce el id del pokemon que quieres eliminar");
                     System.out.println();
                     eliminarPokemonPorId(id);
                 } else if (respuesta == 10) {
-                    System.out.print("Introduce el id del ataque que quieres eliminar: ");
-                    int id = teclado.nextInt();
+                    int id = pedirEntero("Introduce el id del ataque que quieres eliminar");
                     System.out.println();
                     eliminarAtaquePorId(id);
-                } else if (respuesta == 11) {
+                } else if (respuesta == 0) {
                     System.out.print("\tAdios");
                     em.close();
                     emf.close();
                 } else {
                     System.out.println("Opcion introducida no valida");
                 }
-            } while (respuesta != 11);
+            } while (respuesta != 0);
         } catch (InputMismatchException e) {
             System.out.println("\tTas colao crack, maquina, fiera, mastodonte, titan, maestro");
         }
 
+    }
+
+    public static boolean preguntarBoolean(String mensaje) {
+        Scanner teclado = new Scanner(System.in);
+        System.out.print(mensaje + " (si/no): ");
+        return teclado.next().equalsIgnoreCase("si");
+    }
+
+    public static int pedirEntero(String mensaje) {
+        Scanner teclado = new Scanner(System.in);
+        System.out.print(mensaje + ": ");
+        return teclado.nextInt();
+    }
+
+    public static String pedirString(String mensaje) {
+        Scanner teclado = new Scanner(System.in);
+        System.out.print(mensaje + ": ");
+        return teclado.next();
     }
 
     public static void insertarPokemon(String nombre, int nivel, String tipo1, String tipo2, boolean ataque) {
@@ -142,29 +134,20 @@ public class pruebaPokEv {
         Pokemon po = new Pokemon(nombre, nivel, tipo1, tipo2);
 
         if (ataque) {
-            Scanner tecladoIf = new Scanner(System.in);
             boolean continuar = true;
 
             while (continuar) {
 
-                System.out.print("Introduce un nombre para el ataque (no se permiten espacios): ");
-                String nombreAt = tecladoIf.next();
-                System.out.print("Introduce un tipo para el ataque: ");
-                String tipoAt = tecladoIf.next();
-                System.out.print("Introduce una potencia para el ataque: ");
-                int potenciaAt = tecladoIf.nextInt();
-                System.out.print("Introduce una precision para el ataque: ");
-                int precisionAt = tecladoIf.nextInt();
+                String nombreAt = pedirString("Introduce un nombre para el ataque (no se permiten espacios)");
+                String tipoAt = pedirString("Introduce un tipo para el ataque");
+                int potenciaAt = pedirEntero("Introduce una potencia para el ataque");
+                int precisionAt = pedirEntero("Introduce una precision para el ataque");
 
                 po.addAtaque(nombreAt, tipoAt, potenciaAt, precisionAt);
-                System.out.print("Ataque añadido con exito, desea añadir otro? (si | no): ");
-                String respuesta = tecladoIf.next();
+                boolean respuesta = preguntarBoolean("Ataque añadido con exito, desea añadir otro?");
                 System.out.println();
-                if (respuesta.equalsIgnoreCase("no")){
+                if (!respuesta){
                     continuar = false;
-                } else if (respuesta.equalsIgnoreCase("si")){
-                } else {
-                    System.out.println("Te has colado, es o si o no");
                 }
 
             }
@@ -191,30 +174,22 @@ public class pruebaPokEv {
         Pokemon po = null;
 
         if (pokemon) {
-            Scanner tecladoIf = new Scanner(System.in);
+
             boolean continuar = true;
 
             while (continuar) {
 
-                System.out.print("Introduce un nombre para el pokemon: ");
-                String nombrePok = tecladoIf.next();
-                System.out.print("Introduce un nivel para el pokemon: ");
-                int nivelPok = tecladoIf.nextInt();
-                System.out.print("Introduce un tipo para el pokemon: ");
-                String tipo1Pok = tecladoIf.next();
-                System.out.print("Introduce otro tipo para el pokemon: ");
-                String tipo2Pok = tecladoIf.next();
+                String nombrePok = pedirString("Introduce un nombre para el pokemon");
+                int nivelPok = pedirEntero("Introduce un nivel para el pokemon");
+                String tipo1Pok = pedirString("Introduce un tipo para el pokemon");
+                String tipo2Pok = pedirString("Introduce otro tipo para el pokemon");
 
                 po = new Pokemon(nombrePok, nivelPok, tipo1Pok, tipo2Pok);
                 at.addPokemon(po);
-                System.out.print("Pokemon añadido con exito, desea añadir otro? (si | no): ");
-                String respuesta = tecladoIf.next();
+                boolean respuesta = preguntarBoolean("Pokemon añadido con exito, desea añadir otro?");
                 System.out.println();
-                if (respuesta.equalsIgnoreCase("no")){
+                if (!respuesta){
                     continuar = false;
-                } else if (respuesta.equalsIgnoreCase("si")){
-                } else {
-                    System.out.println("Te has colado, es o si o no");
                 }
 
             }
@@ -245,18 +220,27 @@ public class pruebaPokEv {
                     .getResultList();
 
             for (Pokemon p: pokemons) {
-                System.out.print("\tPokemon:" +
-                        "\n\t\tId: " + p.getId() +
-                        "\n\t\tNombre: " + p.getNombre() +
-                        "\n\t\tNivel: " + p.getNivel() +
-                        "\n\t\tTipo1: " + p.getTipo1() +
-                        "\n\t\tTipo2: " + p.getTipo2() +
-                        "\n\t\tAtaques: ");
+                if (!p.getAtaques().isEmpty()) {
+                    System.out.print("\tPokemon:" +
+                            "\n\t\tId: " + p.getId() +
+                            "\n\t\tNombre: " + p.getNombre() +
+                            "\n\t\tNivel: " + p.getNivel() +
+                            "\n\t\tTipo1: " + p.getTipo1() +
+                            "\n\t\tTipo2: " + p.getTipo2() +
+                            "\n\t\tAtaques: ");
+                } else {
+                    System.out.print("\tPokemon:" +
+                            "\n\t\tId: " + p.getId() +
+                            "\n\t\tNombre: " + p.getNombre() +
+                            "\n\t\tNivel: " + p.getNivel() +
+                            "\n\t\tTipo1: " + p.getTipo1() +
+                            "\n\t\tTipo2: " + p.getTipo2());
+                }
 
                 for(Ataque at: p.getAtaques()) {
-                    System.out.print("\n\t\t"+at);
+                    System.out.print("\n\t\t"+at.toStringPo());
                 }
-                System.out.println();
+                System.out.println("\n");
             }
 
             System.out.println();
@@ -279,14 +263,25 @@ public class pruebaPokEv {
             List<Pokemon> pokemons = em.createQuery("SELECT p FROM Pokemon p WHERE p.nombre = :nombre", Pokemon.class).setParameter("nombre", nombre).getResultList();
 
             for (Pokemon po : pokemons) {
-                System.out.print("\tID: " + po.getId()
-                        + "\n\tNombre: " + po.getNombre()
-                        + "\n\tNivel: " + po.getNivel()
-                        + "\n\tTipo 1: " + po.getTipo1()
-                        + "\n\tTipo 2: " + po.getTipo2()
-                        + "\n\tAtaques: ");
+                if (!po.getAtaques().isEmpty()) {
+                    System.out.print("\tPokemon:" +
+                            "\n\t\tId: " + po.getId() +
+                            "\n\t\tNombre: " + po.getNombre() +
+                            "\n\t\tNivel: " + po.getNivel() +
+                            "\n\t\tTipo1: " + po.getTipo1() +
+                            "\n\t\tTipo2: " + po.getTipo2() +
+                            "\n\t\tAtaques: ");
+                } else {
+                    System.out.print("\tPokemon:" +
+                            "\n\t\tId: " + po.getId() +
+                            "\n\t\tNombre: " + po.getNombre() +
+                            "\n\t\tNivel: " + po.getNivel() +
+                            "\n\t\tTipo1: " + po.getTipo1() +
+                            "\n\t\tTipo2: " + po.getTipo2());
+                }
+
                 for(Ataque at: po.getAtaques()) {
-                    System.out.print("\n\t\t"+at);
+                    System.out.print("\n\t\t"+at.toStringPo());
                 }
                 System.out.println();
             }
@@ -312,14 +307,24 @@ public class pruebaPokEv {
                     .setParameter("nombre", nombre)
                     .getResultList();
 
-            for (Ataque at : ataques) {
-                System.out.print("\tID: " + at.getId()
-                        + "\n\tNombre: " + at.getNombre()
-                        + "\n\tTipo: " + at.getTipo()
-                        + "\n\tPotencia: " + at.getPotencia()
-                        + "\n\tPrecision: " + at.getPrecisionAt()
-                        + "\n\tPokemons: ");
-                for(Pokemon po: at.getPokemons()) {
+            for (Ataque ataque : ataques) {
+                if (ataque.getPokemons().isEmpty()) {
+                    System.out.print("\tAtaque:" +
+                            "\n\t\tId: " + ataque.getId() +
+                            "\n\t\tNombre: " + ataque.getNombre() +
+                            "\n\t\tTipo: " + ataque.getTipo() +
+                            "\n\t\tPotencia: " + ataque.getPotencia() +
+                            "\n\t\tPrecision: " + ataque.getPrecisionAt());
+                } else {
+                    System.out.print("\tAtaque:" +
+                            "\n\t\tId: " + ataque.getId() +
+                            "\n\t\tNombre: " + ataque.getNombre() +
+                            "\n\t\tTipo: " + ataque.getTipo() +
+                            "\n\t\tPotencia: " + ataque.getPotencia() +
+                            "\n\t\tPrecision: " + ataque.getPrecisionAt() +
+                            "\n\t\tPokemons: ");
+                }
+                for(Pokemon po: ataque.getPokemons()) {
                     System.out.print("\n\t"+po.toStringAtUnico());
                 }
                 System.out.println();
@@ -368,7 +373,7 @@ public class pruebaPokEv {
                 for(Pokemon po: ataque.getPokemons()) {
                     System.out.print("\n\t\t"+po.toStringAt());
                 }
-                System.out.println();
+                System.out.println("\n");
             }
 
             System.out.println();
@@ -386,65 +391,29 @@ public class pruebaPokEv {
 
     public static void actualizarPokemonPorId(int id) {
         Scanner teclado = new Scanner(System.in);
-        String respuesta = "no";
-        boolean cambioNivel;
-        boolean cambioTipo1;
-        boolean cambioTipo2;
-        boolean cambioAtaque;
+        boolean cambioNivel = preguntarBoolean("Desea cambiar el nivel?");
+        boolean cambioTipo1 = preguntarBoolean("Desea cambiar el tipo principal?");
+        boolean cambioTipo2 = preguntarBoolean("Desea cambiar el tipo secundario?");
+        boolean cambioAtaque = preguntarBoolean("Desea cambiar algun ataque?");
 
         try {
             em.getTransaction().begin();
 
             Pokemon po = em.find(Pokemon.class, id);
 
-            System.out.print("Desea cambiar el nivel? (si | no): ");
-            respuesta = teclado.next();
-            if (respuesta.equalsIgnoreCase("si")) {
-                cambioNivel = true;
-            } else {
-                cambioNivel = false;
-            }
-
-            System.out.print("Desea cambiar el tipo principal? (si | no): ");
-            respuesta = teclado.next();
-            if (respuesta.equalsIgnoreCase("si")) {
-                cambioTipo1 = true;
-            } else {
-                cambioTipo1 = false;
-            }
-
-
-            System.out.print("Desea cambiar el tipo secundario? (si | no): ");
-            respuesta = teclado.next();
-            if (respuesta.equalsIgnoreCase("si")) {
-                cambioTipo2 = true;
-            } else {
-                cambioTipo2 = false;
-            }
-
-            System.out.print("Desea cambiar algun ataque? (si | no): ");
-            respuesta = teclado.next();
-            if (respuesta.equalsIgnoreCase("si")) {
-                cambioAtaque = true;
-            } else {
-                cambioAtaque = false;
-            }
-
             int nivel = po.getNivel();
             String tipo1 = po.getTipo1();
             String tipo2 = po.getTipo2();
 
-            if (cambioNivel == true) {
+            if (cambioNivel) {
 
-                System.out.print("Introduce el nuevo nivel que quieres asignar: ");
-                nivel = teclado.nextInt();
+                nivel = pedirEntero("Introduce el nuevo nivel que quieres asignar");
                 po.setNivel(nivel);
 
             }
 
-            if (cambioTipo1 == true) {
-                System.out.print("Introduce el nuevo tipo principal que quieres asignar: ");
-                tipo1 = teclado.next();
+            if (cambioTipo1) {
+                tipo1 = pedirString("Introduce el nuevo tipo principal que quieres asignar");
                 if (tipo1.equalsIgnoreCase("null")) {
                     System.out.println("El tipo principal no puede ser null");
                 } else {
@@ -453,10 +422,9 @@ public class pruebaPokEv {
 
             }
 
-            if (cambioTipo2 == true) {
+            if (cambioTipo2) {
 
-                System.out.print("Introduce el nuevo tipo secundario que quieres asignar: ");
-                tipo2 = teclado.next();
+                tipo2 = pedirString("Introduce el nuevo tipo secundario que quieres asignar");
                 if (tipo2.equalsIgnoreCase("null")) {
                     tipo2 = null;
                 }
@@ -464,7 +432,7 @@ public class pruebaPokEv {
 
             }
 
-            if (cambioAtaque == true) {
+            if (cambioAtaque) {
 
                 Set<Ataque> ataques = po.getAtaques();
                 System.out.println("Tienes " + ataques.size() + " ataques, cual quieres modificar?: ");
@@ -475,64 +443,29 @@ public class pruebaPokEv {
                 System.out.print("Introduce cual de los ataques quieres cambiar: ");
                 int numEvo = teclado.nextInt();
                 int contador = 0;
-                boolean cambioNombre;
-                boolean cambioTipoAt;
-                boolean cambioPrecision;
-                boolean cambioPotencia;
+                boolean cambioNombre = preguntarBoolean("Desea cambiar el nombre?");
+                boolean cambioTipoAt = preguntarBoolean("Desea cambiar el tipo del ataque?");
+                boolean cambioPotencia = preguntarBoolean("Desea cambiar la potencia?");
+                boolean cambioPrecision = preguntarBoolean("Desea cambiar la precision?");
 
                 for (Ataque at: ataques) {
                     if (contador == (numEvo - 1)){
-                        System.out.print("Desea cambiar el nombre? (si | no): ");
-                        respuesta = teclado.next();
-                        if (respuesta.equalsIgnoreCase("si")) {
-                            cambioNombre = true;
-                        } else {
-                            cambioNombre = false;
-                        }
-
-
-                        System.out.print("Desea cambiar el tipo del ataque? (si | no): ");
-                        respuesta = teclado.next();
-                        if (respuesta.equalsIgnoreCase("si")) {
-                            cambioTipoAt = true;
-                        } else {
-                            cambioTipoAt = false;
-                        }
-
-
-                        System.out.print("Desea cambiar la potencia? (si | no): ");
-                        respuesta = teclado.next();
-                        if (respuesta.equalsIgnoreCase("si")) {
-                            cambioPotencia = true;
-                        } else {
-                            cambioPotencia = false;
-                        }
-
-                        System.out.print("Desea cambiar la precision? (si | no): ");
-                        respuesta = teclado.next();
-                        if (respuesta.equalsIgnoreCase("si")) {
-                            cambioPrecision = true;
-                        } else {
-                            cambioPrecision = false;
-                        }
 
                         String nombreAt = at.getNombre();
                         String tipoAt = at.getTipo();
                         int potenciaAt = at.getPotencia();
                         int precisionAt = at.getPrecisionAt();
 
-                        if (cambioNombre == true) {
+                        if (cambioNombre) {
 
-                            System.out.print("Introduce el nuevo nombre que quieres asignar (no se permiten espacios): ");
-                            nombreAt = teclado.next();
+                            nombreAt = pedirString("Introduce el nuevo nombre que quieres asignar (no se permiten espacios)");
                             at.setNombre(nombreAt);
 
                         }
 
-                        if (cambioTipoAt == true) {
+                        if (cambioTipoAt) {
 
-                            System.out.print("Introduce el nuevo tipo que quieres asignar: ");
-                            tipoAt = teclado.next();
+                            tipoAt = pedirString("Introduce el nuevo tipo que quieres asignar");
                             if (tipoAt.equalsIgnoreCase("null")) {
                                 System.out.println("El tipo no puede ser null");
                             } else {
@@ -541,18 +474,16 @@ public class pruebaPokEv {
 
                         }
 
-                        if (cambioPotencia == true) {
+                        if (cambioPotencia) {
 
-                            System.out.print("Introduce la nueva potencia que quieres asignar: ");
-                            potenciaAt = teclado.nextInt();
+                            potenciaAt = pedirEntero("Introduce la nueva potencia que quieres asignar");
                             at.setPotencia(potenciaAt);
 
                         }
 
-                        if (cambioPrecision == true) {
+                        if (cambioPrecision) {
 
-                            System.out.print("Introduce la nueva precision que quieres asignar: ");
-                            precisionAt = teclado.nextInt();
+                            precisionAt = pedirEntero("Introduce la nueva precision que quieres asignar");
                             at.setPrecisionAt(precisionAt);
 
                         }
@@ -583,58 +514,16 @@ public class pruebaPokEv {
     public static void actualizarAtaquePorId(int id) {
         Scanner teclado = new Scanner(System.in);
         String respuesta = "no";
-        boolean cambioNombre;
-        boolean cambioTipo;
-        boolean cambioPotencia;
-        boolean cambioPrecision;
-        boolean cambioPokemon;
+        boolean cambioNombre = preguntarBoolean("Desea cambiar el nombre?");
+        boolean cambioTipo = preguntarBoolean("Desea cambiar el tipo del ataque?");
+        boolean cambioPrecision = preguntarBoolean("Desea cambiar la potencia?");
+        boolean cambioPotencia = preguntarBoolean("Desea cambiar la precision?");
+        boolean cambioPokemon = preguntarBoolean("Desea cambiar algun pokemon?");
 
         try {
             em.getTransaction().begin();
 
             Ataque at = em.find(Ataque.class, id);
-
-            System.out.print("Desea cambiar el nombre? (si | no): ");
-            respuesta = teclado.next();
-            if (respuesta.equalsIgnoreCase("si")) {
-                cambioNombre = true;
-            } else {
-                cambioNombre = false;
-            }
-
-
-            System.out.print("Desea cambiar el tipo? (si | no): ");
-            respuesta = teclado.next();
-            if (respuesta.equalsIgnoreCase("si")) {
-                cambioTipo = true;
-            } else {
-                cambioTipo = false;
-            }
-
-
-            System.out.print("Desea cambiar la potencia? (si | no): ");
-            respuesta = teclado.next();
-            if (respuesta.equalsIgnoreCase("si")) {
-                cambioPotencia = true;
-            } else {
-                cambioPotencia = false;
-            }
-
-            System.out.print("Desea cambiar la precision? (si | no): ");
-            respuesta = teclado.next();
-            if (respuesta.equalsIgnoreCase("si")) {
-                cambioPrecision = true;
-            } else {
-                cambioPrecision = false;
-            }
-
-            System.out.print("Desea cambiar algun pokemon? (si | no): ");
-            respuesta = teclado.next();
-            if (respuesta.equalsIgnoreCase("si")) {
-                cambioPokemon = true;
-            } else {
-                cambioPokemon = false;
-            }
 
             String nombre = at.getNombre();
             String tipo = at.getTipo();
@@ -642,17 +531,15 @@ public class pruebaPokEv {
             int precisionAt = at.getPrecisionAt();
 
 
-            if (cambioNombre == true) {
+            if (cambioNombre) {
 
-                System.out.print("Introduce el nuevo nombre que quieres asignar (no se permiten espacios): ");
-                nombre = teclado.next();
+                nombre = pedirString("Introduce el nuevo nombre que quieres asignar (no se permiten espacios)");
                 at.setNombre(nombre);
 
             }
 
-            if (cambioTipo == true) {
-                System.out.print("Introduce el nuevo tipo principal que quieres asignar: ");
-                tipo = teclado.next();
+            if (cambioTipo) {
+                tipo = pedirString("Introduce el nuevo tipo principal que quieres asignar");
                 if (tipo.equalsIgnoreCase("null")) {
                     System.out.println("El tipo no puede ser null");
                 } else {
@@ -661,83 +548,53 @@ public class pruebaPokEv {
 
             }
 
-            if (cambioPotencia == true) {
+            if (cambioPotencia) {
 
-                System.out.print("Introduce la nueva potencia que quieres asignar: ");
-                potencia = teclado.nextInt();
+                potencia = pedirEntero("Introduce la nueva potencia que quieres asignar");
                 at.setPotencia(potencia);
 
             }
 
-            if (cambioPrecision == true) {
+            if (cambioPrecision) {
 
-                System.out.print("Introduce la nueva precision que quieres asignar: ");
-                precisionAt = teclado.nextInt();
+                precisionAt = pedirEntero("Introduce la nueva precision que quieres asignar");
                 at.setPrecisionAt(precisionAt);
 
             }
 
-            if (cambioPokemon == true) {
+            if (cambioPokemon) {
 
                 Set<Pokemon> pokemons = at.getPokemons();
                 System.out.println("Tienes " + pokemons.size() + " evoluciones, cual quieres modificar?: ");
                 System.out.println("\tAtaques: ");
-                for (Pokemon po: pokemons) {
-                    System.out.println("\t"+po.toStringAtUnico());
+                for (Pokemon po : pokemons) {
+                    System.out.println("\t" + po.toStringAtUnico());
                 }
 
                 System.out.println();
 
-                System.out.print("Introduce cual de las evoluciones quieres cambiar: ");
-                int numPok = teclado.nextInt();
+                int numPok = pedirEntero("Introduce cual de las evoluciones quieres cambiar");
                 int contador = 0;
-                boolean cambioNivel;
-                boolean cambioTipo1;
-                boolean cambioTipo2;
+                boolean cambioNivel = preguntarBoolean("Desea cambiar el nivel?");
+                boolean cambioTipo1 = preguntarBoolean("Desea cambiar el tipo principal?");
+                boolean cambioTipo2 = preguntarBoolean("Desea cambiar el tipo secundario?");
 
-                for (Pokemon po: pokemons) {
-                    if (contador == (numPok - 1)){
-                        System.out.print("Desea cambiar el nivel? (si | no): ");
-                        respuesta = teclado.next();
-                        if (respuesta.equalsIgnoreCase("si")) {
-                            cambioNivel = true;
-                        } else {
-                            cambioNivel = false;
-                        }
-
-
-                        System.out.print("Desea cambiar el tipo principal? (si | no): ");
-                        respuesta = teclado.next();
-                        if (respuesta.equalsIgnoreCase("si")) {
-                            cambioTipo1 = true;
-                        } else {
-                            cambioTipo1 = false;
-                        }
-
-
-                        System.out.print("Desea cambiar el tipo secundario? (si | no): ");
-                        respuesta = teclado.next();
-                        if (respuesta.equalsIgnoreCase("si")) {
-                            cambioTipo2 = true;
-                        } else {
-                            cambioTipo2 = false;
-                        }
+                for (Pokemon po : pokemons) {
+                    if (contador == (numPok - 1)) {
 
                         int nivel = po.getNivel();
                         String tipo1 = po.getTipo1();
                         String tipo2 = po.getTipo2();
 
-                        if (cambioNivel == true) {
+                        if (cambioNivel) {
 
-                            System.out.print("Introduce el nuevo nivel que quieres asignar: ");
-                            nivel = teclado.nextInt();
+                            nivel = pedirEntero("Introduce el nuevo nivel que quieres asignar");
                             po.setNivel(nivel);
 
                         }
 
-                        if (cambioTipo1 == true) {
-                            System.out.print("Introduce el nuevo tipo principal que quieres asignar: ");
-                            tipo1 = teclado.next();
+                        if (cambioTipo1) {
+                            tipo1 = pedirString("Introduce el nuevo tipo principal que quieres asignar");
                             if (tipo1.equalsIgnoreCase("null")) {
                                 System.out.println("El tipo principal no puede ser null");
                             } else {
@@ -746,10 +603,9 @@ public class pruebaPokEv {
 
                         }
 
-                        if (cambioTipo2 == true) {
+                        if (cambioTipo2) {
 
-                            System.out.print("Introduce el nuevo tipo secundario que quieres asignar: ");
-                            tipo2 = teclado.next();
+                            tipo2 = pedirString("Introduce el nuevo tipo secundario que quieres asignar");
                             if (tipo2.equalsIgnoreCase("null")) {
                                 tipo2 = null;
                             }
@@ -757,12 +613,12 @@ public class pruebaPokEv {
 
                         }
 
+                        contador++;
                     }
-                    contador++;
+
+                    at.setPokemons(pokemons);
+
                 }
-
-                at.setPokemons(pokemons);
-
             }
 
             em.merge(at);
