@@ -20,7 +20,7 @@
     </persistence-unit>
 
     <persistence-unit name="UnidadPokemon">
-        <class>crud.Pokemon</class>
+        <class>crud_r1.Pokemon</class>
         <properties>
             <property name="hibernate.show_sql" value="true" />
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
@@ -36,8 +36,8 @@
     </persistence-unit>
 
     <persistence-unit name="UnidadPokemon2">
-        <class>oneToMany.Pokemon</class>
-        <class>oneToMany.Evolucion</class>
+        <class>oneToMany_r1.Pokemon</class>
+        <class>oneToMany_r1.Evoluciones</class>
         <properties>
             <property name="hibernate.show_sql" value="true" />
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
@@ -61,6 +61,21 @@
             <property name="jakarta.persistence.jdbc.password" value="asdf.1234" />
             <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost/adat4" />
             <property name="eclipselink.logging.level" value="FINE"/>
+            <property name="eclipselink.logging.parameters" value="true"/>
+            <property name="jakarta.persistence.schema-generation.database.action" value="create"/>
+            <property name="eclipselink.weaving" value="false" />
+
+        </properties>
+    </persistence-unit>
+
+    <persistence-unit name="UnidadPokemon4">
+        <class>manyToMany_r1.Pokemon</class>
+        <class>manyToMany_r1.Ataque</class>
+        <properties>
+            <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
+            <property name="jakarta.persistence.jdbc.user" value="dam2" />
+            <property name="jakarta.persistence.jdbc.password" value="asdf.1234" />
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost/adat5" />
             <property name="eclipselink.logging.parameters" value="true"/>
             <property name="jakarta.persistence.schema-generation.database.action" value="create"/>
             <property name="eclipselink.weaving" value="false" />

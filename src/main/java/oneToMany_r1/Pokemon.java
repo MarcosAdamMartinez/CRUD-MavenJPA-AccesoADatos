@@ -1,7 +1,7 @@
-package oneToMany;
+package oneToMany_r1;
 
 import jakarta.persistence.*;
-import java.util.HashSet;
+
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -31,7 +31,7 @@ public class Pokemon {
     //    orphanRemoval, que si un hijo deja de estar asociado al padre, se elimina de la base de datos automáticamente
     //    fetch que hace que si esta en EAGER al recuperar un pokemon recupere tambien sus Evoluciones asociadas, mientras que si es LAZY no
     @OneToMany(mappedBy = "pokemon", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private Set<Evolucion> evoluciones = new LinkedHashSet<>();
+    private Set<Evoluciones> evoluciones = new LinkedHashSet<>();
 
     public Pokemon() {}
 
@@ -43,16 +43,16 @@ public class Pokemon {
     }
 
     public void addEvolucion(String nombre, int nivel, String tipo1, String tipo2) {
-        Evolucion ev = new Evolucion(nombre, nivel, tipo1, tipo2, this);
+        Evoluciones ev = new Evoluciones(nombre, nivel, tipo1, tipo2, this);
         evoluciones.add(ev);
     }
 
-    public Evolucion addEvolucion(Evolucion ev) {
+    public Evoluciones addEvolucion(Evoluciones ev) {
         evoluciones.add(ev);
         return ev;
     }
 
-    public boolean delEvolucion(Evolucion ev) {
+    public boolean delEvolucion(Evoluciones ev) {
         evoluciones.remove(ev);
         return true;
     }
@@ -68,7 +68,7 @@ public class Pokemon {
                 "\n\tEvoluciones: \n\t\t" + evoluciones.toString().replace("[", "").replace("]", "").replace(",","\n\t\t");
     }
 
-    public boolean removeEvolucion(Evolucion ev) {
+    public boolean removeEvolucion(Evoluciones ev) {
         return evoluciones.remove(ev);
     }
 
@@ -90,9 +90,9 @@ public class Pokemon {
 
     public void setTipo2(String tipo2) { this.tipo2 = tipo2; }
 
-    public Set<Evolucion> getEvoluciones() { return evoluciones; }
+    public Set<Evoluciones> getEvoluciones() { return evoluciones; }
 
-    public void setEvoluciones(Set<Evolucion> evoluciones) {
+    public void setEvoluciones(Set<Evoluciones> evoluciones) {
         this.evoluciones = evoluciones;
     }
 }

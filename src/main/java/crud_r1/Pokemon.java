@@ -1,4 +1,4 @@
-package crud;
+package crud_r1;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

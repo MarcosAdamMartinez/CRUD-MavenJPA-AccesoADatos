@@ -1,4 +1,4 @@
-package oneToMany;
+package oneToMany_r1;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -16,7 +16,7 @@ public class pruebaPokEv {
         Pokemon po = new Pokemon("Charmander", 11, "Fuego", null);
         po.addEvolucion("Charmeleon", 23, "Fuego", null);
 
-        po.addEvolucion(new Evolucion("Charizard", 38, "Fuego", "Volador",po));
+        po.addEvolucion(new Evoluciones("Charizard", 38, "Fuego", "Volador",po));
         Scanner teclado = new Scanner(System.in);
         int respuesta = 0;
 
@@ -202,7 +202,7 @@ public class pruebaPokEv {
 
             Pokemon po = em.find(Pokemon.class, id);
 
-            System.out.println("Desea cambiar el nivel? (si | no): ");
+            System.out.print("Desea cambiar el nivel? (si | no): ");
             respuesta = teclado.next();
             if (respuesta.equalsIgnoreCase("si")) {
                 cambioNivel = true;
@@ -211,7 +211,7 @@ public class pruebaPokEv {
             }
 
 
-            System.out.println("Desea cambiar el tipo principal? (si | no): ");
+            System.out.print("Desea cambiar el tipo principal? (si | no): ");
             respuesta = teclado.next();
             if (respuesta.equalsIgnoreCase("si")) {
                 cambioTipo1 = true;
@@ -220,7 +220,7 @@ public class pruebaPokEv {
             }
 
 
-            System.out.println("Desea cambiar el tipo secundario? (si | no): ");
+            System.out.print("Desea cambiar el tipo secundario? (si | no): ");
             respuesta = teclado.next();
             if (respuesta.equalsIgnoreCase("si")) {
                 cambioTipo2 = true;
@@ -228,7 +228,7 @@ public class pruebaPokEv {
                 cambioTipo2 = false;
             }
 
-            System.out.println("Desea cambiar alguna evolucion? (si | no): ");
+            System.out.print("Desea cambiar alguna evolucion? (si | no): ");
             respuesta = teclado.next();
             if (respuesta.equalsIgnoreCase("si")) {
                 cambioEvo = true;
@@ -272,18 +272,19 @@ public class pruebaPokEv {
 
             if (cambioEvo == true) {
 
-                Set<Evolucion> evos = po.getEvoluciones();
-                System.out.println("Tienes " + evos.size() + " pokemon, cual quieres modificar?: ");
-                for (Evolucion evo: evos) {
-                    System.out.println("\tEvoluciones:\n\t\t"+evo);
+                Set<Evoluciones> evos = po.getEvoluciones();
+                System.out.println("Tienes " + evos.size() + " evoluciones, cual quieres modificar?: ");
+                System.out.println("\tEvoluciones:\n");
+                for (Evoluciones evo: evos) {
+                    System.out.println("\t\t"+evo);
                 }
-                System.out.print("Introduce el id: ");
+                System.out.print("Introduce cual de las evoluciones quieres cambiar: ");
                 int numEvo = teclado.nextInt();
                 int contador = 0;
 
-                for (Evolucion evo: evos) {
+                for (Evoluciones evo: evos) {
                     if (contador == (numEvo - 1)){
-                        System.out.println("Desea cambiar el nivel? (si | no): ");
+                        System.out.print("Desea cambiar el nivel? (si | no): ");
                         respuesta = teclado.next();
                         if (respuesta.equalsIgnoreCase("si")) {
                             cambioNivel = true;
@@ -292,7 +293,7 @@ public class pruebaPokEv {
                         }
 
 
-                        System.out.println("Desea cambiar el tipo principal? (si | no): ");
+                        System.out.print("Desea cambiar el tipo principal? (si | no): ");
                         respuesta = teclado.next();
                         if (respuesta.equalsIgnoreCase("si")) {
                             cambioTipo1 = true;
@@ -301,7 +302,7 @@ public class pruebaPokEv {
                         }
 
 
-                        System.out.println("Desea cambiar el tipo secundario? (si | no): ");
+                        System.out.print("Desea cambiar el tipo secundario? (si | no): ");
                         respuesta = teclado.next();
                         if (respuesta.equalsIgnoreCase("si")) {
                             cambioTipo2 = true;

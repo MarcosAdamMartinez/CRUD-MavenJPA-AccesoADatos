@@ -1,10 +1,10 @@
-package oneToMany;
+package oneToMany_r1;
 
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "evoluciones")
-public class Evolucion {
+public class Evoluciones {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,9 +20,9 @@ public class Evolucion {
     @JoinColumn(name = "id_pokemon")
     private Pokemon pokemon;
 
-    public Evolucion() {}
+    public Evoluciones() {}
 
-    public Evolucion(String nombre, int nivel, String tipo1, String tipo2, Pokemon pokemon) {
+    public Evoluciones(String nombre, int nivel, String tipo1, String tipo2, Pokemon pokemon) {
         this.nombre = nombre;
         this.nivel = nivel;
         this.tipo1 = tipo1;
