@@ -30,7 +30,7 @@ public class Pokemon {
     // PERSIST hace que las creaciones persistan
     // MERGE hace que los cambios se pasen de padres a hijos
     // Añadimos tambien la anotacion @JoinTable que creara la tabla intermedia que relacionara las 2 tablas:
-    // Pasamos al @JoinTable por parametros el nombre, el nombre del campo id de la table padre y el nomrbe del campo id de la tabla hija
+    // Pasamos al @JoinTable por parametros el nombre, el nombre del campo id de la table padre y el nombre del campo id de la tabla hija
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "pokemon_ataque", joinColumns = @JoinColumn(name = "id_pokemon"), inverseJoinColumns = @JoinColumn(name = "id_ataque"))
     Set<Ataque> ataques = new LinkedHashSet<>();
