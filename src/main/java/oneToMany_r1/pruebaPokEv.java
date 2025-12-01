@@ -13,10 +13,6 @@ public class pruebaPokEv {
 
     public static void main(String[] args) {
 
-        Pokemon po = new Pokemon("Charmander", 11, "Fuego", null);
-        po.addEvolucion("Charmeleon", 23, "Fuego", null);
-
-        po.addEvolucion(new Evoluciones("Charizard", 38, "Fuego", "Volador",po));
         Scanner teclado = new Scanner(System.in);
         int respuesta = 0;
 

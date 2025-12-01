@@ -135,6 +135,12 @@ public class pruebaPokAt {
 
         if (ataque) {
             boolean continuar = true;
+             for (Ataque at: po.getAtaques()) {
+                 if (){
+
+                 }
+             }
+
 
             while (continuar) {
 
@@ -528,6 +534,7 @@ public class pruebaPokAt {
 
             Ataque at = em.find(Ataque.class, id);
 
+
             String nombre = at.getNombre();
             String tipo = at.getTipo();
             int potencia = at.getPotencia();
@@ -652,6 +659,9 @@ public class pruebaPokAt {
             em.getTransaction().begin();
 
             Pokemon po = em.find(Pokemon.class, id);
+            for (Ataque at: po.getAtaques()) {
+                at.getPokemons().remove(po);
+            }
             em.remove(po);
 
             em.getTransaction().commit();
@@ -671,6 +681,11 @@ public class pruebaPokAt {
             em.getTransaction().begin();
 
             Ataque at = em.find(Ataque.class, id);
+
+            for (Pokemon po: at.getPokemons()) {
+                po.getAtaques().remove(at);
+            }
+
             em.remove(at);
 
             em.getTransaction().commit();
